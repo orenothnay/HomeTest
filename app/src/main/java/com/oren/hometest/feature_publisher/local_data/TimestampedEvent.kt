@@ -1,7 +1,7 @@
 package com.oren.hometest.feature_publisher.local_data
 
-import androidx.room.*
-import kotlinx.coroutines.flow.Flow
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "timestamped_events")
 data class TimestampedEvent(

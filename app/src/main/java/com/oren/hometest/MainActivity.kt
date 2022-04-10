@@ -21,19 +21,26 @@ class MainActivity : AppCompatActivity() {
             LocalEventDatabase::class.java, "local-event-database"
         ).build()
         val remoteAPIImpl = RemoteAPIMock()
-        val eventPublisher = EventPublisherImpl(database.timestampedEventDao(), remoteAPIImpl) // manual injection to keep things simple, would use DI framework in real project.
+        val eventPublisher = EventPublisherImpl(
+            database.timestampedEventDao(),
+            remoteAPIImpl
+        ) // manual injection to keep things simple, would use DI framework in real project.
         // also, in a real project this would go in a sticky service. Or at least a view model. omitted for simplicity.
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.send.setOnClickListener {
-            eventPublisher.publish(Event(binding.subject.text.toString(), binding.payload.text.toString()))
+            eventPublisher.publish(
+                Event(
+                    binding.subject.text.toString(),
+                    binding.payload.text.toString()
+                )
+            )
         }
         var counter = 0
         binding.generateEventsButton.setOnClickListener {
-            for (i in 0..9)
-            {
+            for (i in 0..9) {
                 counter++
                 eventPublisher.publish(Event("subject${counter}", "payload${counter}"))
             }
