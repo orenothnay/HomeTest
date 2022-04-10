@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         ).build()
         val remoteAPIImpl = RemoteAPIMock()
         val eventPublisher = EventPublisherImpl(database.timestampedEventDao(), remoteAPIImpl) // manual injection to keep things simple, would use DI framework in real project.
+        // also, in a real project this would go in a sticky service. Or at least a view model. omitted for simplicity.
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
